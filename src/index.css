@@ -1,0 +1,36 @@
+.dashContainer{
+
+}
+.body{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+.sorting{
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+input{
+ /* border: none; */
+ outline: none;
+ padding: 5px;
+ border: 1px solid rgb(141, 140, 140);
+  /* border: none; */
+  border-radius: 8px;
+}
+.nav{
+  display: flex;
+  
+  justify-content: center;
+  margin: auto;
+}
+.addContainer{
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+.add-box{
+  display: flex;
+  justify-content: center;
+}
