@@ -1,5 +1,11 @@
-.dashContainer{
-
+ table{
+  width: 100%;
+  margin: auto;
+  margin-top: 15px;
+}
+tr:hover{
+  background-color: #c4c3c3;
+  transition: 0.4s;
 }
 .body{
   box-sizing: border-box;
@@ -33,4 +39,7 @@ input{
 .add-box{
   display: flex;
   justify-content: center;
+}
+.pie{
+ width: 50%;
 }

@@ -46,11 +46,21 @@ export default function Dashboard() {
   const getdata = (neq,catNeq,priceSort)=>{
     dispatch(dispatchDashLoading())
     axios.get(`https://mock-json-server-rdn1.onrender.com/products?gender_ne=${neq}&q=${catNeq}&_sort=price&_order=${priceSort}`).then((res)=>{
+      let men = 0;
+      let women = 0
+      res.data?.map((ele)=>{
+        if(ele.gender=="Men"){
+          men++;
+        }
+        else{
+          women++;
+        }
+      })
       dispatch(dispatchDashSuccess(res.data))
     })
   }
   const deleted = (id)=>{
-      axios.delete(`https://mock-json-server-rdn1.onrender.com/products/${id}`).then((res)=>settoggle(!toggle))
+      axios.delete(`https://mock-json-server-rdn1.onrender.com/products/${id}`).then((res)=>{settoggle(!toggle)})
   }
   useEffect(()=>{
     getdata(selectedOption.value,selectedOption1.value,selectedOption2.value)
@@ -58,7 +68,7 @@ export default function Dashboard() {
   return (
     <div className='dashContainer'>
       <div className='sorting'>
-        <input type="text" placeholder='Search Products' />
+        <input type="text" placeholder='Search Products'  />
 
       <Select
         defaultValue={selectedOption}

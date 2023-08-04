@@ -1,65 +1,53 @@
 import { CChart } from '@coreui/react-chartjs'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { dispatchDashLoading, dispatchDashSuccess } from '../Redux/reducerType'
+import axios from 'axios'
+import {Pie} from 'react-chartjs-2' 
+import {chart as ChartJS} from 'chart.js/auto'
 
 export default function Stats() {
-  return (
-    <div>
+  const state = useSelector((state)=>state)
 
-{/* <CChart 
-  type="radar"
-  data={{
-    labels: [
-      'Eating',
-      'Drinking',
-      'Sleeping',
-      'Designing',
-      'Coding',
-      'Cycling',
-      'Running',
-    ],
-    datasets: [
-      {
-        label: 'My First dataset',
-        backgroundColor: 'rgba(220, 220, 220, 0.2)',
-        borderColor: 'rgba(220, 220, 220, 1)',
-        pointBackgroundColor: 'rgba(220, 220, 220, 1)',
-        pointBorderColor: '#fff',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220, 220, 220, 1)',
-        data: [65, 59, 90, 81, 56, 55, 40],
-      },
-      {
-        label: 'My Second dataset',
-        backgroundColor: 'rgba(151, 187, 205, 0.2)',
-        borderColor: 'rgba(151, 187, 205, 1)',
-        pointBackgroundColor: 'rgba(151, 187, 205, 1)',
-        pointBorderColor: '#fff',
-        pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(151, 187, 205, 1)',
-        data: [28, 48, 40, 19, 96, 27, 100],
-      },
-    ],
-  }}
-  options={{
-    plugins: {
-      legend: {
-        labels: {
-          color: getStyle('--cui-body-color'),
-        }
-      }
-    },
-    scales: {
-      r: {
-        grid: {
-          color: getStyle('--cui-border-color-translucent'),
-        },
-        ticks: {
-          color: getStyle('--cui-body-color'),
-        },
-      },
-    },
-  }}
-/> */}
-    </div>
-  )
+
+const dispatch = useDispatch()
+  const getdata = ()=>{
+    dispatch(dispatchDashLoading())
+    axios.get(`https://mock-json-server-rdn1.onrender.com/products`).then((res)=>{
+      
+      dispatch(dispatchDashSuccess(res.data))
+    })
+  }
+  useEffect(()=>{ 
+    getdata()
+  },[])
+  console.log(state.men);
+ return(
+  <>
+  {
+    state.isLoading?"":(<div className='pie'>
+      <Pie  data={{
+      labels: [
+        "Men",
+        "Women"
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [state.men, state.women],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+      }]
+    }} />
+    </div>)
+    
+  }
+  
+  </>
+ 
+ )
+  
 }

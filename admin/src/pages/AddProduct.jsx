@@ -38,7 +38,13 @@ export default function AddProduct() {
         gender:selectedOption.value,
         category:selectedOption1.value,
         price:price
-    }).then((res)=>console.log(res))
+    }).then(()=>{
+      setSelectedOption(genderOptions[0])
+      setprice(null)
+      setSelectedOption1(manCat[0])
+      setproName("")
+
+    })
   }
   return (<>
   
