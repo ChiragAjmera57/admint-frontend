@@ -5,7 +5,7 @@ export default function Stats() {
   return (
     <div>
 
-<CChart 
+{/* <CChart 
   type="radar"
   data={{
     labels: [
@@ -59,7 +59,7 @@ export default function Stats() {
       },
     },
   }}
-/>
+/> */}
     </div>
   )
 }
